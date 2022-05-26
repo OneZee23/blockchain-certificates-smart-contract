@@ -1,0 +1,39 @@
+{
+  "name": "blockchain-certificates-smart-contract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OneZee23/blockchain-certificates-smart-contract.git"
+  },
+  "keywords": [],
+  "author": "Nikita Shevelev akka OneZee - OneZee23",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OneZee23/blockchain-certificates-smart-contract/issues"
+  },
+  "homepage": "https://github.com/OneZee23/blockchain-certificates-smart-contract#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.0.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@openzeppelin/contracts": "^4.6.0",
+    "@openzeppelin/test-helpers": "^0.5.15",
+    "@typechain/ethers-v5": "^10.0.0",
+    "@typechain/hardhat": "^6.0.0",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "chai": "^4.3.6",
+    "dotenv": "^16.0.1",
+    "ethers": "^5.6.8",
+    "hardhat": "^2.9.6",
+    "mocha": "^10.0.0",
+    "ts-node": "^10.8.0",
+    "typechain": "^8.0.0",
+    "typescript": "^4.7.2"
+  }
+}

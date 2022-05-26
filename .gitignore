@@ -1,0 +1,18 @@
+# Default files
+node_modules
+.env
+coverage
+coverage.json
+typechain
+
+# IDEs
+.idea
+
+# Hardhat
+cache
+artifacts
+typechain-types
+
+# OpenZeppelin
+.openzeppelin/unknown-*.json
+.DS_Store
