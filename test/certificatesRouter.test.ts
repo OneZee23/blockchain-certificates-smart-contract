@@ -12,7 +12,7 @@ describe('CertificatesRouter', function () {
   let admin: SignerWithAddress;
   let user: SignerWithAddress;
   let anotherUser: SignerWithAddress;
-  let relayer: SignerWithAddress;
+  let relater: SignerWithAddress;
 
   beforeEach(async function () {
     const accounts = await ethers.getSigners();
@@ -20,9 +20,9 @@ describe('CertificatesRouter', function () {
     admin = accounts[0];
     user = accounts[1];
     anotherUser = accounts[2];
-    relayer = accounts[3];
+    relater = accounts[3];
 
-    certificatesRouter = await CertificatesRouterHelpers.deployAndInitialize(admin, relayer.address);
+    certificatesRouter = await CertificatesRouterHelpers.deployAndInitialize(admin, relater.address);
   });
 
   it('Any address gets version', async function () {
@@ -35,7 +35,7 @@ describe('CertificatesRouter', function () {
     const ipfsHash = '0xSomeHash';
     const certificateDescription = 'Hello world!';
 
-    await expect(certificatesRouter.connect(relayer).createCertificate(to, ipfsHash, certificateDescription))
+    await expect(certificatesRouter.connect(relater).createCertificate(to, ipfsHash, certificateDescription))
       .to.emit(certificatesRouter, 'Created')
       .withArgs(to, ipfsHash, certificateDescription);
   });
@@ -55,16 +55,16 @@ describe('CertificatesRouter', function () {
     const anotherIpfsHash = '0xSomeHash';
     const certificateDescription = 'Hello world!';
 
-    const tx = await certificatesRouter.connect(relayer).createCertificate(to, ipfsHash, certificateDescription);
+    const tx = await certificatesRouter.connect(relater).createCertificate(to, ipfsHash, certificateDescription);
     await tx.wait();
 
-    await expect(certificatesRouter.connect(relayer).createCertificate(to, anotherIpfsHash, certificateDescription))
+    await expect(certificatesRouter.connect(relater).createCertificate(to, anotherIpfsHash, certificateDescription))
       .to.revertedWith("CertificatesRouter: such a certificate has already been issued before");
 
-    await expect(certificatesRouter.connect(relayer).createCertificate(anotherTo, ipfsHash, certificateDescription))
+    await expect(certificatesRouter.connect(relater).createCertificate(anotherTo, ipfsHash, certificateDescription))
       .to.revertedWith("CertificatesRouter: such a certificate has already been issued before");
 
-    await expect(certificatesRouter.connect(relayer).createCertificate(to, ipfsHash, certificateDescription))
+    await expect(certificatesRouter.connect(relater).createCertificate(to, ipfsHash, certificateDescription))
       .to.revertedWith("CertificatesRouter: such a certificate has already been issued before");
   });
 });

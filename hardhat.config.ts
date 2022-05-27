@@ -21,13 +21,13 @@ const config: HardhatUserConfig = {
   networks: {
     ropsten: {
       url: process.env.ETHEREUM_ROPSTEN_URL || "",
-      chainId: 3,
+      chainId: 80001,
       gasPrice: 20000000000,
       accounts: !!process.env.CRYPTO_WALLET_PRIVATE_KEY ? [ process.env.CRYPTO_WALLET_PRIVATE_KEY ] : [],
     },
     mainnet: {
       url: process.env.ETHEREUM_MAINNET_URL || "",
-      chainId: 1,
+      chainId: 137,
       gasPrice: 20000000000,
       accounts: !!process.env.CRYPTO_WALLET_PRIVATE_KEY ? [ process.env.CRYPTO_WALLET_PRIVATE_KEY ] : [],
     },

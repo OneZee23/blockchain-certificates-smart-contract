@@ -1,16 +1,17 @@
-import {ethers} from "hardhat";
-import * as hre from "hardhat";
+import { ethers } from 'hardhat';
+import * as hre from 'hardhat';
 import { CONTRACTS } from './scripts.constants';
 import { getNetwork } from './scripts.utils';
 
 async function main() {
+  console.log('main');
   const [deployer] = await ethers.getSigners();
 
   console.log("Deploying contracts with the account:", deployer.address);
   console.log("Account balance:", (await deployer.getBalance()).toString());
   console.log("Network:", getNetwork());
 
-  const doDeployCertificatesRouter = false;
+  const doDeployCertificatesRouter = true;
   const contracts = CONTRACTS[getNetwork()];
 
   if (doDeployCertificatesRouter) {

@@ -15,11 +15,15 @@
     "sourceMap": true,
     "baseUrl": "./",
     "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "rootDirs": ["./scripts", "./test"],
   },
   "include": [
     "./scripts",
     "./test",
+  ],
+  "exclude": [
+    "node_modules",
   ],
   "files": [
     "./hardhat.config.ts"

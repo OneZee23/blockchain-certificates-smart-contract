@@ -5,7 +5,6 @@ pragma solidity ^0.8.9;
 import "./WrappedAccessControl.sol";
 
 contract CertificatesRouter is WrappedAccessControl {
-//contract CertificatesRouter {
     event Created(address to, string ipfsHash, string description);
 
     address public contractOwner;
@@ -30,7 +29,6 @@ contract CertificatesRouter is WrappedAccessControl {
     uint constant certificatesRouterVersion = 1;
 
     constructor() WrappedAccessControl() {
-//    constructor() public {
         contractOwner = msg.sender;
     }
 
@@ -39,7 +37,6 @@ contract CertificatesRouter is WrappedAccessControl {
     }
 
     function createCertificate(address to, string memory ipfsHash, string memory description) public onlyRole(MANAGER_ROLE) returns (bool) {
-//    function createCertificate(address to, string memory ipfsHash, string memory description) public returns (bool) {
         require(!ipfsHashes[ipfsHash], "CertificatesRouter: such a certificate has already been issued before");
 
         lastId = lastId + 1;
@@ -57,9 +54,7 @@ contract CertificatesRouter is WrappedAccessControl {
     }
 
     function setCertificate(uint id, address to, string memory ipfsHash, string memory description) public view onlyRole(MANAGER_ROLE) {
-//    function setCertificate(uint id, address to, string memory ipfsHash, string memory description) public returns (bool) {
         require(certificates[id].active, "CertificatesRouter: certificate is no active now to change it");
-//        require(msg.sender != contractOwner, "CertificatesRouter: you cannot use this method");
 
         Certificate memory certificate;
         certificate = certificates[id];
@@ -69,18 +64,12 @@ contract CertificatesRouter is WrappedAccessControl {
     }
 
     function setActive(uint id) public view onlyRole(MANAGER_ROLE) {
-//    function setActive(uint id) public returns (bool) {
-//        require(msg.sender != contractOwner, "CertificatesRouter: you cannot use this method");
-
         Certificate memory certificate;
         certificate = certificates[id];
         certificate.active = true;
     }
 
     function setInactive(uint id) public view onlyRole(MANAGER_ROLE) {
-//    function setInactive(uint id) public returns (bool) {
-//        require(msg.sender != contractOwner, "CertificatesRouter: you cannot use this method");
-
         Certificate memory certificate;
         certificate = certificates[id];
         certificate.active = false;
