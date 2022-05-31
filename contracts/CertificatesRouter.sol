@@ -41,7 +41,7 @@ contract CertificatesRouter is WrappedAccessControl {
         require(!ipfsHashes[ipfsHash], "CertificatesRouter: such a certificate has already been issued before");
 
         lastId = lastId + 1;
-        Certificate memory certificate;
+        Certificate storage certificate;
         certificate = certificates[lastId];
         certificate.to = to;
         certificate.ipfsHash = ipfsHash;
@@ -57,7 +57,7 @@ contract CertificatesRouter is WrappedAccessControl {
     function setCertificate(uint id, address to, string memory ipfsHash, string memory description) public onlyRole(MANAGER_ROLE) returns (bool) {
         require(certificates[id].active, "CertificatesRouter: certificate is no active now to change it");
 
-        Certificate memory certificate;
+        Certificate storage certificate;
         certificate = certificates[id];
         certificate.to = to;
         certificate.ipfsHash = ipfsHash;
@@ -68,19 +68,19 @@ contract CertificatesRouter is WrappedAccessControl {
     }
 
     function setActive(uint id) public onlyRole(MANAGER_ROLE) {
-        Certificate memory certificate;
+        Certificate storage certificate;
         certificate = certificates[id];
         certificate.active = true;
     }
 
     function setInactive(uint id) public onlyRole(MANAGER_ROLE) {
-        Certificate memory certificate;
+        Certificate storage certificate;
         certificate = certificates[id];
         certificate.active = false;
     }
 
     function getCertificate(uint id) public view returns (address to, string memory ipfsHash, string memory description) {
-        Certificate memory certificate;
+        Certificate storage certificate;
         certificate = certificates[id];
         return (
             certificates[id].to,
@@ -90,7 +90,7 @@ contract CertificatesRouter is WrappedAccessControl {
     }
 
     function isActive(uint id) public view returns (bool) {
-        Certificate memory certificate;
+        Certificate storage certificate;
         certificate = certificates[id];
         return certificate.active;
     }
