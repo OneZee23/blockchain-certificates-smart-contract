@@ -6,6 +6,7 @@ import "./WrappedAccessControl.sol";
 
 contract CertificatesRouter is WrappedAccessControl {
     event Created(address to, string ipfsHash, string description);
+    event Edited(address to, string ipfsHash, string description);
 
     address public contractOwner;
     uint public lastId;
@@ -23,7 +24,7 @@ contract CertificatesRouter is WrappedAccessControl {
     }
 
     // List of all certificates
-    mapping(uint => Certificate) public certificates;
+    mapping(uint => Certificate) certificates;
     mapping(string => bool) ipfsHashes;
 
     uint constant certificatesRouterVersion = 1;
@@ -53,7 +54,7 @@ contract CertificatesRouter is WrappedAccessControl {
         return true;
     }
 
-    function setCertificate(uint id, address to, string memory ipfsHash, string memory description) public view onlyRole(MANAGER_ROLE) {
+    function setCertificate(uint id, address to, string memory ipfsHash, string memory description) public onlyRole(MANAGER_ROLE) returns (bool) {
         require(certificates[id].active, "CertificatesRouter: certificate is no active now to change it");
 
         Certificate memory certificate;
@@ -61,15 +62,18 @@ contract CertificatesRouter is WrappedAccessControl {
         certificate.to = to;
         certificate.ipfsHash = ipfsHash;
         certificate.description = description;
+
+        emit Edited(to, ipfsHash, description);
+        return true;
     }
 
-    function setActive(uint id) public view onlyRole(MANAGER_ROLE) {
+    function setActive(uint id) public onlyRole(MANAGER_ROLE) {
         Certificate memory certificate;
         certificate = certificates[id];
         certificate.active = true;
     }
 
-    function setInactive(uint id) public view onlyRole(MANAGER_ROLE) {
+    function setInactive(uint id) public onlyRole(MANAGER_ROLE) {
         Certificate memory certificate;
         certificate = certificates[id];
         certificate.active = false;
